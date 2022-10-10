@@ -49,21 +49,21 @@ resource "aws_iam_role_policy_attachment" "attach_iam_policy_to_iam_role" {
   policy_arn = aws_iam_policy.iam_policy_for_string_replacer.arn
 }
 
-# archive the lambda function into the hello-world zip file
-data "archive_file" "zip_the_python_code" {
+# archive the lambda function into the string-replacer zip file
+data "archive_file" "zip_string_replacer_function" {
   type = "zip"
-  source_dir = "${path.module}/src/"
-  output_path = "${path.module}/out/hello-world.zip"
+  source_dir = "${path.module}/../src/"
+  output_path = "${path.module}/out/string-replacer.zip"
 }
 
 # define lambda function
 resource "aws_lambda_function" "string-replacer-function" {
-  filename = "${path.module}/out/hello-world.zip"
+  filename = "${path.module}/out/string-replacer.zip"
   function_name = "String_Replacer_Lambda_Function"
   role = aws_iam_role.lambda_role.arn
   handler = "string_replacer.lambda_handler"
   runtime = "ruby2.7"
-  source_code_hash = filebase64sha256("${path.module}/out/hello-world.zip")
+  source_code_hash = filebase64sha256("${path.module}/out/string-replacer.zip")
   architectures = ["x86_64"]
   environment {
     variables = {
