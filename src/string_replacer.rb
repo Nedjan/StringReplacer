@@ -18,7 +18,9 @@ def lambda_handler(event:, context:)
     dictionary = JSON.parse(ENV['dictionary']) || default_dictionary
 
     dictionary.each_key do |key|
-        query.gsub!(key.to_s, dictionary[key])
+        # this regex captures full words only. Ignores words like "Amazons"
+        # case sensitive
+        query.gsub!(/\b#{key}\b/, dictionary[key])
     end
 
     { statusCode: 200, body: JSON.generate({ result: query }) }
