@@ -4,6 +4,11 @@ This repository includes an API that will allow you to replace specific words fr
 It is deployed into aws using terraform and accessed via a GET request.
 
 
+  
+ # Architecture
+ Serverless API using AWS Lambda and API Gateway
+![Untitled](https://user-images.githubusercontent.com/11302547/194937215-f84eb56d-f3b0-4d0f-a3f6-9f0061eaa3c1.jpg)
+
 **Link to test:** https://22tp9s4xdf.execute-api.eu-central-1.amazonaws.com/serverless_lambda_stage/string-replacer
 
 # Setup
